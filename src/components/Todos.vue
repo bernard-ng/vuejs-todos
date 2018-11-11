@@ -17,9 +17,9 @@
     <footer class="footer">
       <span class="todo-count"><strong>{{ remaing }}</strong> items left</span>
       <ul class="filters">
-        <li><a href="#" :class="{selected: filter == 'all'}" @click="filter = 'all'">All</a></li>
-        <li><a href="#" :class="{selected: filter == 'todo'}" @click="filter = 'todo'">Active</a></li>
-        <li><a href="#" :class="{selected: filter == 'done'}" @click="filter = 'done'">Completed</a></li>
+        <li><a href="#" :class="{selected: filter == 'all'}" @click.prevent="filter = 'all'">All</a></li>
+        <li><a href="#" :class="{selected: filter == 'todo'}" @click.prevent="filter = 'todo'">Active</a></li>
+        <li><a href="#" :class="{selected: filter == 'done'}" @click.prevent="filter = 'done'">Completed</a></li>
       </ul>
     </footer>
   </section>
