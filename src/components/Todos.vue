@@ -5,9 +5,10 @@
             <input type="text" class="new-todo" placeholder="add a todo" v-model="newTodo" @keyup.enter="addTodo">
         </header>
         <div class="main">
-            <ul class="todo-list" v-for="todo in todos">
-                <li class="todo">
+            <ul class="todo-list">
+                <li class="todo" :class="{completed: todo.completed}"  v-for="todo in todos">
                     <div class="view">
+                        <input type="checkbox" v-model="todo.completed" class="toggle">
                         <label>{{ todo.name }}</label>
                     </div>
                 </li>
@@ -20,10 +21,7 @@
 export default {
     data() {
         return {
-            todos: [{
-                name: 'test',
-                completed: false
-            }],
+            todos: [],
             newTodo: '',
         }
     },
