@@ -2,13 +2,13 @@
     <section class="todoapp">
         <header class="header">
             <h1>Todos</h1>
-            <input type="text" class="new-todo" placeholder="add a todo" v-model="newTodo" @keydown.enter="addTodo">
+            <input type="text" class="new-todo" placeholder="add a todo" v-model="newTodo" @keyup.enter="addTodo">
         </header>
         <div class="main">
-            <ul class="todo-list" v-for="todo in todos" :key='todo'>
+            <ul class="todo-list" v-for="todo in todos">
                 <li class="todo">
                     <div class="view">
-                        <label>{{ todo }}</label>
+                        <label>{{ todo.name }}</label>
                     </div>
                 </li>
             </ul>
@@ -20,14 +20,21 @@
 export default {
     data() {
         return {
-            todos: [],
+            todos: [{
+                name: 'test',
+                completed: false
+            }],
             newTodo: '',
         }
     },
 
     methods: {
         addTodo() {
-            this.todos.push(this.newTodo)
+            this.todos.push({
+                completed: false,
+                name: this.newTodo
+            })
+
             this.newTodo = ''
         }
     }
