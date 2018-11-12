@@ -11,6 +11,7 @@
           <div class="view">
               <input type="checkbox" v-model="todo.completed" class="toggle">
               <label>{{ todo.name }}</label>
+              <button class="destroy" @click.prevent="deleteTodo(todo)"></button>
           </div>
         </li>
       </ul>
@@ -44,6 +45,9 @@ export default {
       })
 
       this.newTodo = ""
+    },
+
+    deleteTodo(todo) {
     }
   },
 
