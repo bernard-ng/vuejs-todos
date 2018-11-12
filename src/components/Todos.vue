@@ -37,6 +37,7 @@ export default {
     return {
       todos: [],
       newTodo: '',
+      oldTodo: '',
       editing: null,
       filter: 'all'
     }
@@ -58,6 +59,7 @@ export default {
 
     editTodo (todo) {
       this.editing = todo
+      this.oldTodo = todo.name
     },
 
     doneEdit () {
@@ -65,6 +67,8 @@ export default {
     },
 
     cancelEdit () {
+      this.editing.name = this.oldTodo
+      this.doneEdit()
     },
 
     deleteCompleted () {
