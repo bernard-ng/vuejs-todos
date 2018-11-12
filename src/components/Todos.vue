@@ -16,29 +16,30 @@
         </li>
       </ul>
     </div>
-    <footer class="footer">
+    <footer class="footer" v-show="hasTodos">
       <span class="todo-count"><strong>{{ remaing }}</strong> items left</span>
       <ul class="filters">
         <li><a href="#" :class="{selected: filter === 'all'}" @click.prevent="filter = 'all'">All</a></li>
         <li><a href="#" :class="{selected: filter === 'todo'}" @click.prevent="filter = 'todo'">Active</a></li>
         <li><a href="#" :class="{selected: filter === 'done'}" @click.prevent="filter = 'done'">Completed</a></li>
       </ul>
+      <button class="clear-completed" v-if="completed" @click="deleteCompleted">Delete completed items</button>
     </footer>
   </section>
 </template>
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       todos: [],
-      newTodo: "",
-      filter: "all"
+      newTodo: '',
+      filter: 'all'
     }
   },
 
   methods: {
-    addTodo() {
+    addTodo () {
       this.todos.push({
         completed: false,
         name: this.newTodo
@@ -47,19 +48,28 @@ export default {
       this.newTodo = ""
     },
 
-    deleteTodo(todo) {
+    deleteTodo (todo) {
+      this.todos = this.todos.filter(i => i !== todo)
+    },
+
+    deleteCompleted () {
+      this.todos = this.todos.filter(todo => !todo.completed)
     }
   },
 
   computed: {
-    remaing() {
-      return this.filteredTodos.length
+    remaing () {
+      return this.todos.filter(todo => !todo.completed).length
     },
 
-    filteredTodos() {
-      if (this.filter === "todo") {
+    completed () {
+      return this.todos.filter(todo => !todo.completed)
+    },
+
+    filteredTodos () {
+      if (this.filter === 'todo') {
         return this.todos.filter(todo => !todo.completed)
-      } else if (this.filter === "done") {
+      } else if (this.filter === 'done') {
         return this.todos.filter(todo => todo.completed)
       }
       return this.todos
@@ -75,6 +85,10 @@ export default {
             todo.completed = value
           })
       }
+    },
+
+    hasTodos () {
+      return this.todos.length > 0
     }
   }
 }
