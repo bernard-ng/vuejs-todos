@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <Todos v-model="todos"/>
-    <Todos/>
+    <Todos v-model="todos"/>
     <Todos/>
 
-    <button @click="AddTodo">Add a somethink todo</button>
+    <button @click="addTodo">Add a somethink todo</button>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
   name: 'app',
 
   data () {
-    return  {
+    return {
       todos: [{
         name: 'demo',
         completed: true

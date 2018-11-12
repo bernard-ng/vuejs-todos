@@ -47,6 +47,12 @@ export default {
     }
   },
 
+  watch: {
+    value (value) {
+      this.todos = value
+    }
+  },
+
   methods: {
     addTodo () {
       this.todos.push({
@@ -55,10 +61,12 @@ export default {
       })
 
       this.newTodo = ''
+      this.$emit('input', this.todos)
     },
 
     deleteTodo (todo) {
       this.todos = this.todos.filter(i => i !== todo)
+      this.$emit('input', this.todos)
     },
 
     editTodo (todo) {
@@ -77,6 +85,7 @@ export default {
 
     deleteCompleted () {
       this.todos = this.todos.filter(todo => !todo.completed)
+      this.$emit('input', this.todos)
     }
   },
 
@@ -99,14 +108,14 @@ export default {
     },
 
     allDone: {
-      get() {
+      get () {
         return this.remaing === 0
       },
 
-      set(value) {
+      set (value) {
         this.todos.forEach(todo => {
-            todo.completed = value
-          })
+          todo.completed = value
+        })
       }
     },
 
