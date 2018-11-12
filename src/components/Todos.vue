@@ -7,10 +7,10 @@
     <div class="main">
       <input type="checkbox" class="toggle-all" v-model="allDone">
       <ul class="todo-list">
-        <li class="todo" :class="{completed: todo.completed}"  v-for="todo in filteredTodos" :key="filteredTodos.indexOf(todo)">
+        <li class="todo" :class="{completed: todo.completed, editing: todo === editing}"  v-for="todo in filteredTodos" :key="filteredTodos.indexOf(todo)">
           <div class="view">
               <input type="checkbox" v-model="todo.completed" class="toggle">
-              <label>{{ todo.name }}</label>
+              <label @dblclick="editTodo(todo)">{{ todo.name }}</label>
               <button class="destroy" @click.prevent="deleteTodo(todo)"></button>
           </div>
           <input type="text" class="edit" v-model="todo.name">
@@ -35,6 +35,7 @@ export default {
     return {
       todos: [],
       newTodo: '',
+      editing: null,
       filter: 'all'
     }
   },
@@ -51,6 +52,14 @@ export default {
 
     deleteTodo (todo) {
       this.todos = this.todos.filter(i => i !== todo)
+    },
+
+    editTodo (todo) {
+      this.editing = todo
+    },
+
+    doneEdit () {
+      this.editing = null
     },
 
     deleteCompleted () {
