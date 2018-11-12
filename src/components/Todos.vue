@@ -13,6 +13,7 @@
               <label>{{ todo.name }}</label>
               <button class="destroy" @click.prevent="deleteTodo(todo)"></button>
           </div>
+          <input type="text" class="edit" v-model="todo.name">
         </li>
       </ul>
     </div>
