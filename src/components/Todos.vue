@@ -13,7 +13,7 @@
               <label @dblclick="editTodo(todo)">{{ todo.name }}</label>
               <button class="destroy" @click.prevent="deleteTodo(todo)"></button>
           </div>
-          <input type="text" class="edit" v-model="todo.name">
+          <input type="text" class="edit" v-model="todo.name" v-focus="todo === editing" @keyup.enter="doneEdit" @blur="doneEdit">
         </li>
       </ul>
     </div>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   data () {
     return {
@@ -47,7 +49,7 @@ export default {
         name: this.newTodo
       })
 
-      this.newTodo = ""
+      this.newTodo = ''
     },
 
     deleteTodo (todo) {
@@ -99,6 +101,16 @@ export default {
 
     hasTodos () {
       return this.todos.length > 0
+    }
+  },
+
+  directives: {
+    focus (el, value) {
+      if (value) {
+        Vue.nextTick(() => {
+          el.focus()
+        })
+      }
     }
   }
 }
