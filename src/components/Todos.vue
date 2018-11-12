@@ -33,9 +33,13 @@
 import Vue from 'vue'
 
 export default {
+  props: {
+    value: {type: Array, default () { return [] }}
+  },
+
   data () {
     return {
-      todos: [],
+      todos: this.value,
       newTodo: '',
       oldTodo: '',
       editing: null,

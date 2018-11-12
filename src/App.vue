@@ -1,6 +1,10 @@
 <template>
   <div id="app">
+    <Todos v-model="todos"/>
     <Todos/>
+    <Todos/>
+
+    <button @click="AddTodo">Add a somethink todo</button>
   </div>
 </template>
 
@@ -9,6 +13,25 @@ import Todos from './components/Todos'
 
 export default {
   name: 'app',
+
+  data () {
+    return  {
+      todos: [{
+        name: 'demo',
+        completed: true
+      }]
+    }
+  },
+
+  methods: {
+    addTodo () {
+      this.todos.push({
+        name: 'bernard ng',
+        completed: false
+      })
+    }
+  },
+
   components: {
     Todos
   }
